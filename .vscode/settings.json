@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "2025CK_GameEngine.sln"
+    "dotnet.defaultSolution": "CKGameEngine.sln"
 }
