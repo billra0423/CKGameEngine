@@ -136,7 +136,8 @@ public class PlayerMove : MonoBehaviour
 
         if (OnSlope() && !exitingSlope)
         {
-            rigid.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
+            if (isMove)
+                rigid.AddForce(GetSlopeMoveDirection() * moveSpeed * 10f, ForceMode.Force);
             if (rigid.linearVelocity.y > 0)
             {
                 if (isRun)
