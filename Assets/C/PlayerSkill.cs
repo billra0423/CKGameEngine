@@ -11,7 +11,8 @@ public class PlayerSkill : MonoBehaviour
     public bool isPlayer;
     public Animator animator;
     public PlayerCamera paleyrCamera;
-
+    public GameObject TrnasformParticle;
+    public SurfaceMove sf;
     private void Awake()
     {
         if(Instance == null)
@@ -34,25 +35,28 @@ public class PlayerSkill : MonoBehaviour
         }
         else
         {
-            PlayerOb.transform.position = SlimeOb.transform.position;// + new Vector3(0,1,0);
+            PlayerOb.transform.position = SlimeOb.transform.position;
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
             if (isPlayer)
             {
 
-
-                //animator.SetTrigger("TransForm");
-                Invoke("TrnasSlime", 0f);
-
+                TrnasformParticle.SetActive(true);
+                TrnasformParticle.transform.position = PlayerOb.transform.position + new Vector3(0,1,0);
+                TrnasSlime();
+                sf.isClimbing = false;
                 isPlayer = false;
             }
             else
             {
+                TrnasformParticle.SetActive(true);
+                TrnasformParticle.transform.position = SlimeOb.transform.position + new Vector3(0, 1, 0);
                 isSlime = false;
 
-                Invoke("TransPlayer", 0f);
-                
+                TransPlayer();
+
+
             }
         }
     }
@@ -72,14 +76,12 @@ public class PlayerSkill : MonoBehaviour
     public void EnablePlayer()
     {
         PlayerOb.SetActive(false);
-        //SlimeOb.SetActive(true);
         slime.ResetPhysicsVerticesToStartPositions(true);
         EnableSilmeMesh(true);
     }
     public void EnableSilme()
     {
         EnableSilmeMesh(false);
-        //SlimeOb.SetActive(false);
         slime.ResetPhysicsVerticesToStartPositions(false);
         PlayerOb.SetActive(true);
     }

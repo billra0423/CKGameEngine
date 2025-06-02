@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{133CC00C-18DD-EBA0-9EF0-6157E76F456A}</ProjectGuid>
+    <ProjectGuid>{06516F19-08DC-807E-C13A-3565B2AB3D25}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -62,10 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\C\PlayerSkill.cs" />
-    <Compile Include="Assets\C\SlimeController.cs" />
     <Compile Include="Assets\C\VertexTracker.cs" />
     <Compile Include="Assets\C\SoftBody.cs" />
     <Compile Include="Assets\C\PlayerMove.cs" />
+    <Compile Include="Assets\C\SurfaceMove.cs" />
+    <Compile Include="Assets\C\Particle.cs" />
     <Compile Include="Assets\C\PlayerArm.cs" />
     <Compile Include="Assets\C\PlayerCamera.cs" />
   </ItemGroup>
