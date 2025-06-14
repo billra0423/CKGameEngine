@@ -16,6 +16,9 @@ public class PlayerMove : MonoBehaviour
     public bool isMove;
     public bool isRun;
     public bool isSlope;
+    [SerializeField] private float footstepInterval = 0.5f;
+    private float footstepTimer = 0f;
+
     [Header("Jumping")]
     public float jumpForce;
     public float jumpCooldown;
@@ -67,16 +70,21 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        GroundCheck();
-        MyInput();
-        SpeedControl();
-        StateHendler();
-        Run();
-        isSlope = OnSlope();
-        float hor = Input.GetAxis("Horizontal");
-        float ver = Input.GetAxis("Vertical");
-        animator.SetFloat("vInput", ver);
-        animator.SetFloat("hzInput", -(hor));
+        if (GameManager.instance.isPlay)
+        {
+
+
+            GroundCheck();
+            MyInput();
+            SpeedControl();
+            StateHendler();
+            Run();
+            isSlope = OnSlope();
+            float hor = Input.GetAxis("Horizontal");
+            float ver = Input.GetAxis("Vertical");
+            animator.SetFloat("vInput", ver);
+            animator.SetFloat("hzInput", -(hor));
+        }
     }
     private void FixedUpdate()
     {
@@ -93,9 +101,10 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("Falling", true);
             isJump = true;
             Jump();
-
+            AudioManager.instance.PlaySfx("Jump");
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+
 
     }
     private void StateHendler()
@@ -105,11 +114,13 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("Running", true);
             state = MovementState.Run;
             moveSpeed = runSpeed;
+            footstepInterval = 0.35f;
         }
         else if (isGround)
         {
             state = MovementState.walking;
             moveSpeed = walkSpeed;
+            footstepInterval = 0.45f;
         }
         else
         {
@@ -123,13 +134,27 @@ public class PlayerMove : MonoBehaviour
     {
         Vector3 inputDirection = new Vector3(verticalInput, 0, horizontalInput).normalized;
 
-        if (inputDirection.magnitude > 0)
+        if (inputDirection.magnitude > 0 && isGround)
         {
+
+
+            footstepTimer -= Time.deltaTime;
+
+            if (footstepTimer <= 0f)
+            {
+                if(GameManager.instance.isPlay)
+                AudioManager.instance.PlaySfx("step");
+                footstepTimer = footstepInterval;
+            }
+
+
+
             animator.SetBool("Walking", true);
             isMove = true;
         }
         else
         {
+            footstepTimer = 0f;
             animator.SetBool("Walking", false);
             isMove = false;
         }
@@ -173,18 +198,18 @@ public class PlayerMove : MonoBehaviour
         isGround = Physics.Raycast(PlayerCenter.transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, GroundMask);
         if (isGround)
         {
-           
+
             isJump = false;
             rigid.linearDamping = groundDrag;
             animator.SetBool("Falling", false);
         }
         else
         {
-           
+
             rigid.linearDamping = 0;
             animator.SetBool("Falling", true);
         }
-      
+
     }
     public void Run()
     {

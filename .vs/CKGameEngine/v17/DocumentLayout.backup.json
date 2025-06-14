@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|c:\\users\\sunwoo\\documents\\github\\ckgameengine\\assets\\c\\playerskill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\playerskill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|c:\\users\\sunwoo\\documents\\github\\ckgameengine\\assets\\c\\playerarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\playerarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PlayerSkill.cs",
+              "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\PlayerSkill.cs",
+              "RelativeDocumentMoniker": "Assets\\C\\PlayerSkill.cs",
+              "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\PlayerSkill.cs",
+              "RelativeToolTip": "Assets\\C\\PlayerSkill.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAewEcAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-02T16:23:06.021Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlayerArm.cs",
+              "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\PlayerArm.cs",
+              "RelativeDocumentMoniker": "Assets\\C\\PlayerArm.cs",
+              "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\PlayerArm.cs",
+              "RelativeToolTip": "Assets\\C\\PlayerArm.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAIAywIAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-02T16:21:24.49Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

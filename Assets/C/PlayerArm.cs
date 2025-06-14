@@ -1,8 +1,11 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Analytics.IAnalytic;
 
 public class PlayerArm : MonoBehaviour
 {
+    public static PlayerArm Instance;
     [Header("Arm References")]
     public GameObject armL, armR;
     public Transform StartHandPointL, StartHandPointR;
@@ -22,6 +25,7 @@ public class PlayerArm : MonoBehaviour
     public bool isMovingL, isMovingR;
     public bool isAttachingL, isAttachingR;
     public bool isStartGrapL, isStartGrapR;
+    public bool isShootL, isShootR;
 
     [Header("Objects & Aim")]
     public GameObject HitObL, HitObR, AimPoint;
@@ -32,6 +36,11 @@ public class PlayerArm : MonoBehaviour
     private Coroutine leftMoveCoroutine, rightMoveCoroutine;
     public float stopDistance = 0.2f;
     public float ShootSpeed = 10f;
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+    }
     private void Start()
     {
         LArmPos.gameObject.SetActive(false);
@@ -40,62 +49,99 @@ public class PlayerArm : MonoBehaviour
 
     private void Update()
     {
-        HandleInput();
-        AttachArm();
+        if (GameManager.instance.isPlay)
+        {
+            HandleInput();
+            AttachArm();
+        }
     }
 
     private void LateUpdate()
     {
-        RotateArms();
-        UpdateHandAndGrapplePositions();
+        if (GameManager.instance.isPlay)
+        {
+            RotateArms();
+            UpdateHandAndGrapplePositions();
+        }
     }
-
+    public void OffHand()
+    {
+        ResetLeftArm();
+        ResetRightArm();
+    }
     private void HandleInput()
     {
         if (Input.GetMouseButtonUp(0))
         {
-            if(leftGrappleCoroutine != null)
-            StopCoroutine(leftGrappleCoroutine);
-            if (leftMoveCoroutine != null)
-                StopCoroutine(leftMoveCoroutine);
-            animator.SetBool("LeftAttack", false);
-            LArmPos.gameObject.SetActive(false);
-
-            if (isAttachingL) StartCoroutine(StopGrapL());
+            ResetLeftArm();
         }
 
         if (Input.GetMouseButtonUp(1))
         {
-            if (rightGrappleCoroutine != null)
-                StopCoroutine(rightGrappleCoroutine);
-            if (rightMoveCoroutine != null)
-                StopCoroutine(rightMoveCoroutine);
-            animator.SetBool("RightAttack", false);
-            RArmPos.gameObject.SetActive(false);
-
-            if (isAttachingR) StartCoroutine(StopGrapR());
+            ResetRightArm();
         }
 
-        if (Input.GetKeyDown(KeyCode.Q)) ShootOb(HitObL, true);
-        if (Input.GetKeyDown(KeyCode.E)) ShootOb(HitObR, false);
+        if (Input.GetKeyDown(KeyCode.Q) && isAttachingL) ShootOb(HitObL, true);
+        if (Input.GetKeyDown(KeyCode.E) && isAttachingR) ShootOb(HitObR, false);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isAttachingL && !isStartGrapL && !isMovingL)
             {
                 isStartGrapL = true;
-                StartGrapple(ref jointL, ref armL, ref GrapplingPosL);
+                StartGrapple(HitObL, ref jointL, ref armL, ref GrapplingPosL);
             }
             if (isAttachingR && !isStartGrapR && !isMovingR)
             {
                 isStartGrapR = true;
-                StartGrapple(ref jointR, ref armR, ref GrapplingPosR);
+                StartGrapple(HitObR,ref jointR, ref armR, ref GrapplingPosR);
             }
         }
 
         Grap();
     }
+    private void ResetLeftArm()
+    {
+        if (leftGrappleCoroutine != null)
+            StopCoroutine(leftGrappleCoroutine);
+        if (leftMoveCoroutine != null)
+            StopCoroutine(leftMoveCoroutine);
 
+        animator.SetBool("LeftAttack", false);
+        LArmPos.gameObject.SetActive(false);
+        if (HitObL.GetComponent<Rigidbody>())
+        {
+            if (HitObL.transform.gameObject.layer != 13)
+                HitObL.transform.gameObject.layer = 11;
+        }
+        if (HitObL?.GetComponent<Enemy>() != null && !isShootL)
+            HitObL.GetComponent<Enemy>().ResetEnemy();
+
+        if (isAttachingL)
+            StartCoroutine(StopGrapL());
+    }
+
+    private void ResetRightArm()
+    {
+        if (rightGrappleCoroutine != null)
+            StopCoroutine(rightGrappleCoroutine);
+        if (rightMoveCoroutine != null)
+            StopCoroutine(rightMoveCoroutine);
+
+        animator.SetBool("RightAttack", false);
+        RArmPos.gameObject.SetActive(false);
+        if (HitObR.GetComponent<Rigidbody>())
+        {
+            if(HitObR.transform.gameObject.layer != 13)
+                HitObR.transform.gameObject.layer = 11;
+        }
+      
+        if (HitObR?.GetComponent<Enemy>() != null && !isShootR)
+            HitObR.GetComponent<Enemy>().ResetEnemy();
+
+        if (isAttachingR)
+            StartCoroutine(StopGrapR());
+    }
     private void AttachArm()
     {
         ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
@@ -111,6 +157,7 @@ public class PlayerArm : MonoBehaviour
                 LArmPos.SetActive(true);
                 hitL = hit;
                 leftGrappleCoroutine = StartCoroutine(StartGrapLAfterDelay(0.3f));
+                AudioManager.instance.PlaySfx("Attack");
             }
 
             if (Input.GetMouseButtonDown(1))
@@ -120,6 +167,7 @@ public class PlayerArm : MonoBehaviour
                 RArmPos.SetActive(true);
                 hitR = hit;
                 rightGrappleCoroutine = StartCoroutine(StartGrapRAfterDelay(0.3f));
+                AudioManager.instance.PlaySfx("Attack");
             }
         }
         else
@@ -135,6 +183,12 @@ public class PlayerArm : MonoBehaviour
         if (hitL.collider == null) yield break;
 
         HitObL = hitL.transform.gameObject;
+        if (HitObL.transform.GetComponent<Enemy>())
+        {
+
+
+            HitObL.transform.GetComponent<Enemy>().ani.SetBool("isStun",true);
+        }
         isGrapping = true;
         RayGrap(ref lrL, ref GrapplingPosL, ref isAttachingL, hitL);
 
@@ -153,8 +207,14 @@ public class PlayerArm : MonoBehaviour
         yield return new WaitForSeconds(delay);
 
         if (hitR.collider == null) yield break;
-
         HitObR = hitR.transform.gameObject;
+
+        if (HitObR.transform.GetComponent<Enemy>())
+        {
+
+
+            HitObR.transform.GetComponent<Enemy>().ani.SetBool("isStun", true);
+        }
         isGrapping = true;
         RayGrap(ref lrR, ref GrapplingPosR, ref isAttachingR, hitR);
 
@@ -200,22 +260,42 @@ public class PlayerArm : MonoBehaviour
 
     public void RayGrap(ref LineRenderer lr, ref Transform GrapplingPos, ref bool isAttaching, RaycastHit hitData)
     {
+        isShootL = false;
+        isShootR = false;
         isAttaching = true;
-        GrapplingPos.position = hitData.point;
-        GrapplingPos.SetParent(hitData.transform);
+        if (hitData.transform.GetComponent<Rigidbody>())
+        {
+            if (hitData.transform.tag == "Enemy")
+            {
+                GrapplingPos.position = hitData.transform.position + new Vector3(0,1.5f,0);
+                GrapplingPos.SetParent(hitData.transform);
+            }
+            else
+            {
+                GrapplingPos.position = hitData.transform.position;
+                GrapplingPos.SetParent(hitData.transform);
+            }
+            
+        }
+        else
+        {
+            GrapplingPos.position = hitData.point;
+            GrapplingPos.SetParent(hitData.transform);
+        }
+       
         lr.positionCount = 2;
     }
 
-    public void StartGrapple(ref SpringJoint joint, ref GameObject arm, ref Transform GrapplingPos)
+    public void StartGrapple(GameObject hitob, ref SpringJoint joint, ref GameObject arm, ref Transform GrapplingPos)
     {
-        if (HitObL?.GetComponent<Rigidbody>() == null || HitObR?.GetComponent<Rigidbody>() == null)
+        if (hitob?.GetComponent<Rigidbody>() == null )
         {
             isGrapping = true;
             joint = gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = GrapplingPos.position;
-
             float distance = Vector3.Distance(transform.position + Vector3.up, GrapplingPos.position);
+            AudioManager.instance.PlaySfx("Grappling"); 
             joint.maxDistance = distance * 0.3f;
             joint.minDistance = distance * 0.25f;
             joint.spring = 10f;
@@ -242,13 +322,13 @@ public class PlayerArm : MonoBehaviour
         // 왼팔 물체 -> 왼손 쪽으로 회전
         if (isAttachingL && HitObL != null)
         {
-            LookAtHand(HitObL, armL.transform.position);
+            LookAtHand(HitObL, armL.transform.position, GrapplingPosL);
         }
 
         // 오른팔 물체 -> 오른손 쪽으로 회전
         if (isAttachingR && HitObR != null)
         {
-            LookAtHand(HitObR, armR.transform.position);
+            LookAtHand(HitObR, armR.transform.position, GrapplingPosR);
         }
     }
 
@@ -258,6 +338,15 @@ public class PlayerArm : MonoBehaviour
 
         Rigidbody rb = targetObj.GetComponent<Rigidbody>();
         if (rb == null) return;
+        targetObj.transform.tag = "PlayerBullet";
+        targetObj.transform.gameObject.layer = 12;
+
+        if (targetObj.GetComponent<Enemy>())
+        {
+            targetObj.GetComponent<Enemy>().isStun = true;
+            targetObj.GetComponent<Enemy>().isAttached = true;
+            transform.gameObject.layer = 11;
+        }
 
         Vector3 dir = (arm.transform.position - rb.position);
         float distance = dir.magnitude;
@@ -271,22 +360,26 @@ public class PlayerArm : MonoBehaviour
         }
         else
         {
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            rb.linearVelocity = new Vector3(0,0,0);
+            rb.angularVelocity = new Vector3(0, 0, 0);
             rb.linearDamping = 0f;
         }
     }
 
-    private void LookAtHand(GameObject targetObj, Vector3 handPosition)
+    private void LookAtHand(GameObject targetObj, Vector3 handPosition, Transform aTransform)
     {
         if (targetObj == null || targetObj.GetComponent<Rigidbody>() == null)
             return;
 
-        Rigidbody rb = targetObj.GetComponent<Rigidbody>();
-        Vector3 direction = (handPosition - targetObj.transform.position).normalized;
+        Vector3 directionToHand = (handPosition - targetObj.transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToHand);
 
-        // 즉시 회전
-        rb.rotation = Quaternion.LookRotation(-direction);
+        targetObj.transform.rotation = Quaternion.Slerp(
+            targetObj.transform.rotation,
+            targetRotation,
+            Time.deltaTime * 1
+        );
+
     }
     public void ShootOb(GameObject obj, bool isLeft)
     {
@@ -295,16 +388,25 @@ public class PlayerArm : MonoBehaviour
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.AddForce(ray.direction * ShootSpeed, ForceMode.Impulse);
-
+            obj.transform.gameObject.layer = 11;
+            if (obj.GetComponent<Enemy>())
+            {
+               
+                obj.GetComponent<Enemy>().isAttached = false;
+            }
             if (isLeft)
             {
+                isShootL = true;
                 StopGrapple(ref lrL, ref jointL, ref isAttachingL);
                 animator.SetBool("LeftAttack", false);
+                AudioManager.instance.PlaySfx("Throwing");
             }
             else
             {
+                isShootR = true;
                 StopGrapple(ref lrR, ref jointR, ref isAttachingR);
                 animator.SetBool("RightAttack", false);
+                AudioManager.instance.PlaySfx("Throwing");
             }
         }
     }
@@ -327,7 +429,8 @@ public class PlayerArm : MonoBehaviour
         }
 
         Arm.transform.position = endPosition;
-
+        if(isAttaching)
+        AudioManager.instance.PlaySfx("Attaching");
         if (Arm == LHandPos) isMovingL = false;
         else if (Arm == RHandPos) isMovingR = false;
     }

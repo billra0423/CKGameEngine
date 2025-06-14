@@ -24,7 +24,7 @@ public class SoftBody : MonoBehaviour
 {
     public float radius = 0.001f;
     public float springFactor = 0.001f;
-    public int softbodyLayer = 30;
+    public int softbodyLayer = 8;
     public float physicsVertexRadius = 0.01f;
 
 
@@ -242,7 +242,7 @@ public class SoftBody : MonoBehaviour
         phyVertex.transform.position = position;
         phyVertex.transform.rotation = Quaternion.Euler(0, 0, 0);
         phyVertex.transform.parent = Offset;
-
+        phyVertex.transform.tag = "Player";
         Rigidbody rigidBody = phyVertex.AddComponent<Rigidbody>();
         rigidBody.collisionDetectionMode = CollisionDetectionMode.Continuous;
         //rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
@@ -447,7 +447,7 @@ public class SoftBody : MonoBehaviour
             {
                 ResetPhysicsVerticesToStartPositions(true);
             }
-            // if(!SF.isWall && !SF.isGround)
+           
             rigid.isKinematic = SF.isClimbing;
             rigid.useGravity = !SF.isClimbing;
             ToggleCollidersBasedOnDistance();
@@ -469,8 +469,7 @@ public class SoftBody : MonoBehaviour
             }
             if (rb != null)
             {
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
+           
                 rb.isKinematic = !isRe;
             }
         }
@@ -504,14 +503,13 @@ public class SoftBody : MonoBehaviour
 
             if (distance > colliderToggleDistance)
             {
-                Debug.Log(i);
-                // 거리 벗어남 + 현재 활성화 상태 → 비활성화
+             
                 col.enabled = false;
                 //colliderActiveStates[i] = false;
             }
             else if (distance <= colliderToggleDistance)
             {
-                // 거리 내부 + 현재 비활성화 상태 → 활성화
+              
                 col.enabled = true;
                 //colliderActiveStates[i] = true;
             }

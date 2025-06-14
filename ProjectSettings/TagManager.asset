@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Jelly
+  - Success
+  - PlayerBullet
+  - EnemyBullet
+  - Enemy
+  - Wall
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -14,11 +21,11 @@ TagManager:
   - Ground
   - Wall
   - Player
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - EnemyBullet
+  - PlayerBullet
+  - CurrentBullet
+  - Dead
   - 
   - 
   - 

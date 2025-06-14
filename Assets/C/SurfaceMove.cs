@@ -66,6 +66,11 @@ public class SurfaceMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.V) && (isGround || isWall))
         {
             isClimbing = !isClimbing;
+
+            if (isClimbing)
+            {
+                AudioManager.instance.PlaySfx("SlimeAttaching");
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -102,6 +107,7 @@ public class SurfaceMove : MonoBehaviour
         {
           
             rb.AddForce(Vector3.up * jumpVelocity, ForceMode.VelocityChange);
+            AudioManager.instance.PlaySfx("Jump");
         }
     }
     public Vector3 GetProjectedMovement(Vector3 movement)
