@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        Target = GameObject.Find("Slime");
         Initialize();
     }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8609149330413827762}
   - component: {fileID: 4385786837225792410}
   - component: {fileID: 329026428769855437}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ceiling Closed
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 391.99277, y: 0.20000099, z: 232.10889}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

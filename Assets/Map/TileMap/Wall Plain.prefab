@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2660779425513756667}
   - component: {fileID: 2103800600126368991}
   - component: {fileID: 1981743954743580836}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall Plain
-  m_TagString: Wall
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -168,6 +168,10 @@ PrefabInstance:
     - target: {fileID: 8730245854331329977, guid: b2452a5c2cd649a4db9eebcd16f7b155, type: 3}
       propertyPath: m_Name
       value: wall
+      objectReference: {fileID: 0}
+    - target: {fileID: 8730245854331329977, guid: b2452a5c2cd649a4db9eebcd16f7b155, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8730245854331329977, guid: b2452a5c2cd649a4db9eebcd16f7b155, type: 3}
       propertyPath: m_TagString
