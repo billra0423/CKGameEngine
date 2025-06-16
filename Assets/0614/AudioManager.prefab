@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5651853966598757600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3862489144193167881}
+  - component: {fileID: 4173744162722030258}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3862489144193167881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5651853966598757600}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 225.27644, y: 145.8304, z: -106.23019}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4173744162722030258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5651853966598757600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1359a70d0c48a0f4282444c99cffa873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmClip: {fileID: 8300000, guid: 94d4bd0a6809d70479f705a8e6bee007, type: 3}
+  bgmVolume: 0.5
+  bgmPlayer: {fileID: 0}
+  audioInfos:
+  - name: Attack
+    sfxClip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+    volume: 0.2
+  - name: Throwing
+    sfxClip: {fileID: 8300000, guid: 7f42197b10ce5454ca787dc00c80c83c, type: 3}
+    volume: 0.1
+  - name: Transformation
+    sfxClip: {fileID: 8300000, guid: 0994c12e202f342459a4212e7287f7e8, type: 3}
+    volume: 0.5
+  - name: step
+    sfxClip: {fileID: 8300000, guid: 9621c2af7e754394a918f34fa7dca26e, type: 3}
+    volume: 0.05
+  - name: Grappling
+    sfxClip: {fileID: 8300000, guid: ac94d029ea0170246a143a31789a1efd, type: 3}
+    volume: 0.01
+  - name: HitPlayer
+    sfxClip: {fileID: 8300000, guid: 84ef2c653b1428b4c884d3eacf274b67, type: 3}
+    volume: 0.6
+  - name: ButtonSound
+    sfxClip: {fileID: 8300000, guid: 19f89c6e740e7447f9e12a8310d3e973, type: 3}
+    volume: 0.5
+  - name: GameOver
+    sfxClip: {fileID: 8300000, guid: df729d213c4be44a9b55cd109f5cd4f9, type: 3}
+    volume: 0.5
+  - name: Success
+    sfxClip: {fileID: 8300000, guid: 7478151cf36724a7dada558f746c3633, type: 3}
+    volume: 0.5
+  - name: Attaching
+    sfxClip: {fileID: 8300000, guid: e45f359e9cd33ef4d9ee02900859cc07, type: 3}
+    volume: 0.5
+  - name: Jump
+    sfxClip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+    volume: 0.05
+  - name: SlimeAttaching
+    sfxClip: {fileID: 8300000, guid: 54601ada04b59c2419ccd0e95f914eab, type: 3}
+    volume: 0.3
+  - name: EnemyBullet
+    sfxClip: {fileID: 8300000, guid: be8957c3425ebf846bd445c33935900e, type: 3}
+    volume: 0.3
+  - name: EnemyHit
+    sfxClip: {fileID: 8300000, guid: 73a6493412b0e5c418b9dcd33753e5c4, type: 3}
+    volume: 0.3
+  sfxVolume: 0.5
+  channels: 30
+  Objects: 0
+  sfxPlayer: []

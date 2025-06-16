@@ -11,7 +11,7 @@ public class PlayerSkill : MonoBehaviour
     public bool isPlayer;
     public Animator animator;
     public PlayerCamera paleyrCamera;
-
+    public SurfaceMove sf;
     private void Awake()
     {
         if(Instance == null)
@@ -28,58 +28,71 @@ public class PlayerSkill : MonoBehaviour
     }
     void Update()
     {
-        if (isPlayer)
-        {
-            SlimeOb.transform.position = PlayerOb.transform.position + new Vector3(0,1,0);
-        }
-        else
-        {
-            PlayerOb.transform.position = SlimeOb.transform.position;// + new Vector3(0,1,0);
-        }
-        if (Input.GetKeyDown(KeyCode.C))
+        if (GameManager.instance.isPlay)
         {
             if (isPlayer)
             {
-
-
-                //animator.SetTrigger("TransForm");
-                Invoke("TrnasSlime", 0f);
-
-                isPlayer = false;
+                SlimeOb.transform.position = PlayerOb.transform.position + new Vector3(0, 1, 0);
             }
             else
             {
-                isSlime = false;
+                PlayerOb.transform.position = SlimeOb.transform.position;
+            }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                if (isPlayer)
+                {
 
-                Invoke("TransPlayer", 0f);
-                
+                    TrnasSlime();
+
+                }
+                else
+                {
+
+
+                    TransPlayer();
+
+
+                }
             }
         }
     }
     public void TransPlayer()
     {
+        GameManager.instance.SkillTransUi();
+        ParticleManager.instance.InstantiateParticle(SlimeOb.transform.position + new Vector3(0, 1, 0), "TransformParticle");
+        isSlime = false;
+
         isPlayer = true;
         paleyrCamera.Target = PlayerTargetPos.transform;
+        SlimeOb.GetComponent<Collider>().enabled = false;
         EnableSilme();
         animator.SetTrigger("TransF");
+        AudioManager.instance.PlaySfx("Transformation");
     }
     public void TrnasSlime()
     {
+        PlayerArm.Instance.OffHand();
+        GameManager.instance.SkillTransUi();
+        ParticleManager.instance.InstantiateParticle(PlayerOb.transform.position + new Vector3(0, 1, 0), "TransformParticle");
+        sf.isClimbing = false;
+        isPlayer = false;
+
         paleyrCamera.Target = SlimeOb.transform;
+        SlimeOb.GetComponent<Collider>().enabled = true;
         EnablePlayer();
         isSlime = true;
+        AudioManager.instance.PlaySfx("Transformation");
     }
     public void EnablePlayer()
     {
         PlayerOb.SetActive(false);
-        //SlimeOb.SetActive(true);
         slime.ResetPhysicsVerticesToStartPositions(true);
         EnableSilmeMesh(true);
     }
     public void EnableSilme()
     {
         EnableSilmeMesh(false);
-        //SlimeOb.SetActive(false);
         slime.ResetPhysicsVerticesToStartPositions(false);
         PlayerOb.SetActive(true);
     }

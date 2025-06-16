@@ -16,6 +16,9 @@ public class PlayerMove : MonoBehaviour
     public bool isMove;
     public bool isRun;
     public bool isSlope;
+    [SerializeField] private float footstepInterval = 0.5f;
+    private float footstepTimer = 0f;
+
     [Header("Jumping")]
     public float jumpForce;
     public float jumpCooldown;
@@ -67,14 +70,21 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        GroundCheck();
-        MyInput();
-        SpeedControl();
-        StateHendler();
-        Run();
-        isSlope = OnSlope();
-        animator.SetFloat("vInput", verticalInput);
-        animator.SetFloat("hzInput", -(horizontalInput));
+        if (GameManager.instance.isPlay)
+        {
+
+
+            GroundCheck();
+            MyInput();
+            SpeedControl();
+            StateHendler();
+            Run();
+            isSlope = OnSlope();
+            float hor = Input.GetAxis("Horizontal");
+            float ver = Input.GetAxis("Vertical");
+            animator.SetFloat("vInput", ver);
+            animator.SetFloat("hzInput", -(hor));
+        }
     }
     private void FixedUpdate()
     {
@@ -83,17 +93,18 @@ public class PlayerMove : MonoBehaviour
 
     private void MyInput()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        if (Input.GetKey(jumpKey) && readyToJump && isGround)
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+        verticalInput = Input.GetAxisRaw("Vertical");
+        if (Input.GetKeyDown(jumpKey) && readyToJump && isGround)
         {
             readyToJump = false;
             animator.SetBool("Falling", true);
             isJump = true;
             Jump();
-
+            AudioManager.instance.PlaySfx("Jump");
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+
 
     }
     private void StateHendler()
@@ -103,11 +114,13 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("Running", true);
             state = MovementState.Run;
             moveSpeed = runSpeed;
+            footstepInterval = 0.35f;
         }
         else if (isGround)
-        { 
+        {
             state = MovementState.walking;
             moveSpeed = walkSpeed;
+            footstepInterval = 0.45f;
         }
         else
         {
@@ -121,13 +134,27 @@ public class PlayerMove : MonoBehaviour
     {
         Vector3 inputDirection = new Vector3(verticalInput, 0, horizontalInput).normalized;
 
-        if (inputDirection.magnitude > 0)
+        if (inputDirection.magnitude > 0 && isGround)
         {
+
+
+            footstepTimer -= Time.deltaTime;
+
+            if (footstepTimer <= 0f)
+            {
+                if(GameManager.instance.isPlay)
+                AudioManager.instance.PlaySfx("step");
+                footstepTimer = footstepInterval;
+            }
+
+
+
             animator.SetBool("Walking", true);
             isMove = true;
         }
         else
         {
+            footstepTimer = 0f;
             animator.SetBool("Walking", false);
             isMove = false;
         }
@@ -143,18 +170,18 @@ public class PlayerMove : MonoBehaviour
                 if (isRun)
                 {
 
-                    rigid.AddForce(Vector3.down * 80f, ForceMode.Force);
+                    rigid.AddForce(Vector3.down * 50f, ForceMode.Force);
                 }
                 else
                 {
-                    rigid.AddForce(Vector3.down * 30f, ForceMode.Force);
+                    rigid.AddForce(Vector3.down * 50f, ForceMode.Force);
                 }
             }
         }
         else if (isGround)
         {
-            if(isMove)
-            rigid.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            if (isMove)
+                rigid.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
         else
         {
@@ -168,13 +195,21 @@ public class PlayerMove : MonoBehaviour
     }
     public void GroundCheck()
     {
-        isGround = Physics.Raycast(PlayerCenter.transform.position, Vector3.down, playerHeight * 0.5f + 1f, GroundMask);
-        if (isGround && readyToJump)
+        isGround = Physics.Raycast(PlayerCenter.transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, GroundMask);
+        if (isGround)
         {
-            isJump = false;
-            animator.SetBool("Falling", false);
 
+            isJump = false;
+            rigid.linearDamping = groundDrag;
+            animator.SetBool("Falling", false);
         }
+        else
+        {
+
+            rigid.linearDamping = 0;
+            animator.SetBool("Falling", true);
+        }
+
     }
     public void Run()
     {
@@ -193,7 +228,7 @@ public class PlayerMove : MonoBehaviour
         exitingSlope = true;
 
         rigid.linearVelocity = new Vector3(rigid.linearVelocity.x, 0f, rigid.linearVelocity.z);
-        rigid.AddForce(transform.up * jumpForce, ForceMode.Force);
+        rigid.AddForce(transform.up * jumpForce * 30, ForceMode.Force);
 
     }
     private void ResetJump()
@@ -225,7 +260,7 @@ public class PlayerMove : MonoBehaviour
 
     private bool OnSlope()
     {
-        if (Physics.Raycast(PlayerCenter.transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 1))
+        if (Physics.Raycast(PlayerCenter.transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.2f))
         {
             float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
             return angle < maxSlopeAngle && angle != 0;
@@ -240,16 +275,24 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnDrawGizmosSelected()
     {
-      
+
         Vector3 start = transform.position;
 
-        
+
         Vector3 slopeDirection = GetSlopeMoveDirection();
 
-       
+
         Gizmos.color = Color.blue;
 
-       
+
         Gizmos.DrawRay(start, slopeDirection * 2f);
+
+        Gizmos.color = Color.red;
+
+        Vector3 rayOrigin = PlayerCenter.transform.position;
+        Vector3 rayDirection = Vector3.down;
+        float rayLength = playerHeight * 0.5f + 0.2f;
+
+        Gizmos.DrawLine(rayOrigin, rayOrigin + rayDirection * rayLength);
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -24,7 +24,7 @@ public class SoftBody : MonoBehaviour
 {
     public float radius = 0.001f;
     public float springFactor = 0.001f;
-    public int softbodyLayer = 30;
+    public int softbodyLayer = 8;
     public float physicsVertexRadius = 0.01f;
 
 
@@ -33,6 +33,8 @@ public class SoftBody : MonoBehaviour
     private Mesh mesh;
     private Rigidbody rigid;
     private Transform Offset;
+    [SerializeField]
+    private Transform Center;
 
     public List<Transform> physicsVerticiesOnVertex;
     public List<VertexBone> vertexBones;
@@ -46,6 +48,7 @@ public class SoftBody : MonoBehaviour
     [Header("PD/Position")]
     public float PositionProportional = 100f;
     public float PositionDerivative = 10f;
+    public float colliderToggleDistance = 10f;
 
 
     private MeshFilter meshFilter;
@@ -56,7 +59,7 @@ public class SoftBody : MonoBehaviour
     public bool isJoint;
     private float SProprtional = 100;
     private float SDerivative = 8;
-
+    public SurfaceMove SF;
     private void Start()
     {
         Physics.IgnoreLayerCollision(softbodyLayer, softbodyLayer, true);
@@ -65,7 +68,7 @@ public class SoftBody : MonoBehaviour
         Offset.parent = transform;
         Offset.position = transform.position;
         Offset.rotation = Quaternion.Euler(0, 0, 0);
-
+        transform.gameObject.layer = softbodyLayer;
         rigid = GetComponent<Rigidbody>();
         meshFilter = GetComponent<MeshFilter>();
 
@@ -180,7 +183,7 @@ public class SoftBody : MonoBehaviour
                 particle1.position,
                 particle2.position);
 
-         
+
             distanceConstraints.Add(new DistanceConstraint(particle1, particle2, distanceBetween, 0.2f));
         }
     }
@@ -191,13 +194,55 @@ public class SoftBody : MonoBehaviour
             CreatePhysicsVertex(vertexBone.position);
         }
     }
+    /*   private void CreatePhysicsVertex(Vector3 position)
+       {
+           // 구 모양이 있는 PhysicsVertex 생성
+           GameObject phyVertex = GameObject.CreatePrimitive(PrimitiveType.Sphere); // ✅ 시각적 구
+           phyVertex.name = "PhysicsVertex";
+           phyVertex.transform.position = position;
+           phyVertex.transform.rotation = Quaternion.identity;
+           phyVertex.transform.parent = Offset;
+
+           // 구의 크기 설정
+           phyVertex.transform.localScale = Vector3.one * physicsVertexRadius * 2f; // 반지름이기 때문에 * 2
+
+           // Rigidbody 설정
+           Rigidbody rigidBody = phyVertex.AddComponent<Rigidbody>();
+           rigidBody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+           //rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
+
+           // 대상 타겟 생성
+           GameObject target = new GameObject("Target");
+           target.transform.position = position;
+           target.transform.rotation = Quaternion.identity;
+           target.transform.parent = Offset;
+
+           // VertexTracker 설정
+           VertexTracker tracker = phyVertex.AddComponent<VertexTracker>();
+           tracker.TransTarget = target.transform;
+           tracker.PositionProportional = PositionProportional;
+           tracker.PositionDerivative = PositionDerivative;
+           tracker.maxDepenetrationVelocity = 20;
+
+           // Collider 설정 (이미 SphereCollider 있음)
+           SphereCollider sphereCollider = phyVertex.GetComponent<SphereCollider>();
+           sphereCollider.radius = physicsVertexRadius;
+           phyVertex.layer = softbodyLayer;
+
+           if (colliderMaterial)
+               sphereCollider.material = colliderMaterial;
+
+           colliderActiveStates.Add(phyVertex.transform);
+           physicsVerticiesOnVertex.Add(phyVertex.transform);
+       }*/
+
     private void CreatePhysicsVertex(Vector3 position)
     {
         GameObject phyVertex = new GameObject("PhysicsVertex");
         phyVertex.transform.position = position;
         phyVertex.transform.rotation = Quaternion.Euler(0, 0, 0);
         phyVertex.transform.parent = Offset;
-
+        phyVertex.transform.tag = "Player";
         Rigidbody rigidBody = phyVertex.AddComponent<Rigidbody>();
         rigidBody.collisionDetectionMode = CollisionDetectionMode.Continuous;
         //rigidBody.constraints = RigidbodyConstraints.FreezeRotation;
@@ -215,6 +260,7 @@ public class SoftBody : MonoBehaviour
         phyVertex.GetComponent<VertexTracker>().maxDepenetrationVelocity = 20;
 
         SphereCollider sphereCollider = phyVertex.AddComponent<SphereCollider>();
+        colliderActiveStates.Add(phyVertex.transform);
         sphereCollider.radius = physicsVertexRadius;
         phyVertex.layer = softbodyLayer;
 
@@ -316,14 +362,14 @@ public class SoftBody : MonoBehaviour
 
             SoftJointLimit highLimit = new SoftJointLimit
             {
-                bounciness = 1.1f,
+                bounciness = 1f,
                 contactDistance = distanceBetween,
                 limit = 10
             };
 
             SoftJointLimit lowLimit = new SoftJointLimit
             {
-                bounciness = 1.1f,
+                bounciness = 1f,
                 contactDistance = distanceBetween,
                 limit = -10
             };
@@ -401,7 +447,10 @@ public class SoftBody : MonoBehaviour
             {
                 ResetPhysicsVerticesToStartPositions(true);
             }
-            rigid.isKinematic = false;
+           
+            rigid.isKinematic = SF.isClimbing;
+            rigid.useGravity = !SF.isClimbing;
+            ToggleCollidersBasedOnDistance();
         }
 
 
@@ -420,18 +469,20 @@ public class SoftBody : MonoBehaviour
             }
             if (rb != null)
             {
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
+           
                 rb.isKinematic = !isRe;
             }
         }
     }
     private void FixedUpdate()
     {
+
         for (int i = 0; i < vertexBones.Count; i++)
         {
-            rigid.AddForceAtPosition(-physicsVerticiesOnVertex[i].GetComponent<VertexTracker>().Force * springFactor * rigid.mass, physicsVerticiesOnVertex[i].position);
+            if (!SF.isClimbing)
+                rigid.AddForceAtPosition(-physicsVerticiesOnVertex[i].GetComponent<VertexTracker>().Force * springFactor * rigid.mass, physicsVerticiesOnVertex[i].position);
         }
+
         if (!isJoint)
         {
 
@@ -440,6 +491,28 @@ public class SoftBody : MonoBehaviour
                 constraint.Solve();
             }
 
+        }
+    }
+    private void ToggleCollidersBasedOnDistance()
+    {
+        for (int i = 0; i < colliderActiveStates.Count; i++)
+        {
+            Transform vertex = colliderActiveStates[i];
+            float distance = Vector3.Distance(vertex.position, transform.position);
+            Collider col = colliderActiveStates[i].GetComponent<Collider>();
+
+            if (distance > colliderToggleDistance)
+            {
+             
+                col.enabled = false;
+                //colliderActiveStates[i] = false;
+            }
+            else if (distance <= colliderToggleDistance)
+            {
+              
+                col.enabled = true;
+                //colliderActiveStates[i] = true;
+            }
         }
     }
 

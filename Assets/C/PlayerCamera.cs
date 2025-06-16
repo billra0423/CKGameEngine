@@ -22,7 +22,7 @@ public class PlayerCamera : MonoBehaviour
     public bool isWallLook;
     public float duration = 0.5f;
     public float majnitude = 0.1f;
-
+    public SurfaceMove sf;
     public void Awake()
     {
         Cursor.visible = true;
@@ -30,19 +30,23 @@ public class PlayerCamera : MonoBehaviour
     }
     private void Update()
     {
-        LookRotation();
+        if (GameManager.instance.isPlay)
+        {
+            LookRotation();
+        }
     }
     private void LookRotation()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-
+   
         RotationX -= Input.GetAxis("Mouse Y") * Speed;
         RotationX = Mathf.Clamp(RotationX, Min, Max);
         RotationY += Input.GetAxis("Mouse X") * Speed;
 
         Quaternion targetRot = Quaternion.Euler(0f, RotationY, 0f);
         playerOb.transform.rotation = Quaternion.Slerp(playerOb.transform.rotation, targetRot, Time.deltaTime * 5f);
+      
+        if(sf.isClimbing)
+        Target.transform.rotation = Quaternion.Slerp(Target.transform.localRotation, targetRot, Time.deltaTime * 5f);
         targetRotation = Quaternion.Euler(RotationX, RotationY, 0);
 
         if (Physics.Linecast(Target.position + new Vector3(0,0.5f,0), Target.position + targetRotation * Offset, out hit, layer))
@@ -70,9 +74,5 @@ public class PlayerCamera : MonoBehaviour
        
 
     }
-    private void WallLook()
-    {
-       
-    }
-
+   
 }
