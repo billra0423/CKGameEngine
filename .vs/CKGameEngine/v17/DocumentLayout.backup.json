@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|c:\\users\\sunwoo\\documents\\github\\ckgameengine\\assets\\c\\playerskill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\playerskill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Obstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Assets\\C\\Obstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|c:\\users\\sunwoo\\documents\\github\\ckgameengine\\assets\\c\\playerarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\playerarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\assets\\c\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\assets\\c\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\assets\\c\\jelly.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\jelly.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -23,28 +31,51 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PlayerSkill.cs",
-              "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\PlayerSkill.cs",
-              "RelativeDocumentMoniker": "Assets\\C\\PlayerSkill.cs",
-              "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\PlayerSkill.cs",
-              "RelativeToolTip": "Assets\\C\\PlayerSkill.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAewEcAAAAwAAAAAAAAAA==",
+              "Title": "Obstacle.cs",
+              "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Obstacle.cs",
+              "RelativeDocumentMoniker": "Assets\\C\\Obstacle.cs",
+              "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Obstacle.cs",
+              "RelativeToolTip": "Assets\\C\\Obstacle.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwB4AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T16:23:06.021Z",
+              "WhenOpened": "2025-06-17T12:55:47.049Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PlayerArm.cs",
-              "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\PlayerArm.cs",
-              "RelativeDocumentMoniker": "Assets\\C\\PlayerArm.cs",
-              "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\PlayerArm.cs",
-              "RelativeToolTip": "Assets\\C\\PlayerArm.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAIAywIAAAAAFAAAAAAAAAA==",
+              "Title": "Enemy.cs",
+              "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Enemy.cs",
+              "RelativeDocumentMoniker": "Assets\\C\\Enemy.cs",
+              "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Enemy.cs",
+              "RelativeToolTip": "Assets\\C\\Enemy.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAK0AAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-02T16:21:24.49Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-14T08:57:59.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Player.cs",
+              "RelativeDocumentMoniker": "Assets\\C\\Player.cs",
+              "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Player.cs",
+              "RelativeToolTip": "Assets\\C\\Player.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAgwFUAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T08:45:16.339Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Jelly.cs",
+              "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Jelly.cs",
+              "RelativeDocumentMoniker": "Assets\\C\\Jelly.cs",
+              "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Jelly.cs",
+              "RelativeToolTip": "Assets\\C\\Jelly.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T08:43:42.27Z"
             }
           ]
         }
