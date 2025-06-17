@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: defualt
   m_EditorClassIdentifier: 
   m_Cells:
-  - m_GameObject: {fileID: 2263764635358849901, guid: 6abdd9c30f6962e489270d254f76be87, type: 3}
-    m_Offset: {x: 0, y: 19, z: 0}
+  - m_GameObject: {fileID: 3658457784872492770, guid: 12e3476c2318d9c488e5f63368a1cb7b, type: 3}
+    m_Offset: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 5, z: 1}
-    m_Orientation: {x: 0, y: 0, z: 0, w: 1}
+    m_Orientation: {x: 0, y: 0.8509035, z: 0, w: 0.52532196}
   m_Size: {x: 1, y: 1, z: 1}
   m_Pivot: {x: 0, y: 0, z: 0}
   m_CanChangeZPosition: 0
@@ -27,3 +27,13 @@ MonoBehaviour:
     cellSwizzle: 0
   hiddenGrid: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
+  obj: {fileID: 4511557129561224975, guid: 0761b605f2cfb12448a675eaef8be8fd, type: 3}
+  obj1: {fileID: 3658457784872492770, guid: 12e3476c2318d9c488e5f63368a1cb7b, type: 3}
+  obj2: {fileID: 3658457784872492770, guid: 12e3476c2318d9c488e5f63368a1cb7b, type: 3}
+  obj3: {fileID: 3805279450463976050, guid: 8f5cb15cb72d4cc48b0d9c701ecdb4a4, type: 3}
+  obj4: {fileID: 2263764635358849901, guid: 6abdd9c30f6962e489270d254f76be87, type: 3}
+  obj5: {fileID: 8618473813033157540, guid: 5976ac01c3c64ec4e9127c8c670ab041, type: 3}
+  obj6: {fileID: 387364091424724237, guid: aedebdaeae12a6743b39120d2f5156b0, type: 3}
+  obj7: {fileID: 439239393980121046, guid: 1e3974e3db8c48c41b2604d2478e7e9e, type: 3}
+  obj8: {fileID: 6761943548671733579, guid: 267d293db279e2149a7f12ebb78675d7, type: 3}
+  obj9: {fileID: 0}
