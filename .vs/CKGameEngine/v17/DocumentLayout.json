@@ -3,15 +3,31 @@
   "WorkspaceRootPath": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|c:\\users\\sunwoo\\documents\\github\\ckgameengine\\assets\\c\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|c:\\users\\sunwoo\\documents\\github\\ckgameengine\\assets\\c\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\assets\\c\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|c:\\users\\sunwoo\\documents\\github\\ckgameengine\\assets\\c\\jelly.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|c:\\users\\sunwoo\\documents\\github\\ckgameengine\\assets\\c\\door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\door.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|c:\\users\\sunwoo\\documents\\github\\ckgameengine\\assets\\c\\trigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\trigger.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|c:\\users\\sunwoo\\documents\\github\\ckgameengine\\assets\\c\\playercamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\playercamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|c:\\users\\sunwoo\\documents\\github\\ckgameengine\\assets\\c\\obstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\obstacle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\assets\\c\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\assets\\c\\jelly.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{06516F19-08DC-807E-C13A-3565B2AB3D25}|Assembly-CSharp.csproj|solutionrelative:assets\\c\\jelly.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,11 +38,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "PlayerCamera.cs",
+              "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\PlayerCamera.cs",
+              "RelativeDocumentMoniker": "Assets\\C\\PlayerCamera.cs",
+              "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\PlayerCamera.cs",
+              "RelativeToolTip": "Assets\\C\\PlayerCamera.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAwDAAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T12:58:14.284Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Door.cs",
+              "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Door.cs",
+              "RelativeDocumentMoniker": "Assets\\C\\Door.cs",
+              "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Door.cs",
+              "RelativeToolTip": "Assets\\C\\Door.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwwAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T12:58:08.329Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Trigger.cs",
+              "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Trigger.cs",
+              "RelativeDocumentMoniker": "Assets\\C\\Trigger.cs",
+              "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Trigger.cs",
+              "RelativeToolTip": "Assets\\C\\Trigger.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvxUAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T12:58:01.779Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Obstacle.cs",
+              "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Obstacle.cs",
+              "RelativeDocumentMoniker": "Assets\\C\\Obstacle.cs",
+              "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Obstacle.cs",
+              "RelativeToolTip": "Assets\\C\\Obstacle.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwCAAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T12:55:47.049Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Enemy.cs",
               "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Enemy.cs",
               "RelativeDocumentMoniker": "Assets\\C\\Enemy.cs",
@@ -34,25 +102,24 @@
               "RelativeToolTip": "Assets\\C\\Enemy.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAK0AAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-14T08:57:59.161Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-14T08:57:59.161Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\C\\Player.cs",
               "ToolTip": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Player.cs",
               "RelativeToolTip": "Assets\\C\\Player.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAgwFUAAAAbAAAAAAAAAA==",
+              "ViewState": "AgIAADMAAAAAAAAAAAAYwE0AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-14T08:45:16.339Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Jelly.cs",
               "DocumentMoniker": "C:\\Users\\sunwoo\\Documents\\GitHub\\CKGameEngine\\Assets\\C\\Jelly.cs",
               "RelativeDocumentMoniker": "Assets\\C\\Jelly.cs",
@@ -60,8 +127,7 @@
               "RelativeToolTip": "Assets\\C\\Jelly.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-14T08:43:42.27Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-14T08:43:42.27Z"
             }
           ]
         }

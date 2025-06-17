@@ -1999,7 +1999,7 @@ MonoBehaviour:
   ShootPos: {fileID: 2944805913955717748}
   attackRange: 10
   bulletSpeed: 30
-  attackRate: 3
+  attackRate: 1.5
   isAttack: 0
   isStun: 0
   isAttached: 0

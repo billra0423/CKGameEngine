@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
@@ -51,7 +52,14 @@ public class PlayerCamera : MonoBehaviour
 
         if (Physics.Linecast(Target.position + new Vector3(0,0.5f,0), Target.position + targetRotation * Offset, out hit, layer))
         {
-            transform.position = hit.point + new Vector3(0, YPosOffset, 0);
+            if (hit.transform.position.y < transform.position.y)
+            {
+                transform.position = hit.point + new Vector3(0, YPosOffset, 0);
+            }
+            else
+            {
+                transform.position = hit.point + new Vector3(0, -YPosOffset, 0);
+            }
             transform.rotation = targetRotation;
         }
         else

@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - Wall
   - Ground
+  - GameOver
   layers:
   - Default
   - TransparentFX

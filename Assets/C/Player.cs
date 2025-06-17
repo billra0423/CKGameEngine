@@ -72,6 +72,14 @@ public class Player : MonoBehaviour
         {
             GameManager.instance.Success();
         }
+        if (other.tag == "GameOver")
+        {
+            isDead = true;
+            CurrentHp = 0;
+            GameManager.instance.GameOver();
+            ParticleManager.instance.InstantiateParticle(transform.position + new Vector3(0, 1, 0), "DeadParticle");
+            gameObject.SetActive(false);
+        }
         if (other.tag == "EnemyBullet")
         {
             CurrentBullet = other.gameObject;
